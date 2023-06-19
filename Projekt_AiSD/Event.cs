@@ -9,23 +9,32 @@ namespace Projekt_AiSD
 {
     internal class Event
     {
-        private Dictionary<QuestList,Quest> quests= new Dictionary<QuestList, Quest>();
-        public TaskOptionData data;
+        private Dictionary<QuestList, Quest> quests = new Dictionary<QuestList, Quest>();
+        private TaskOptionData data;
+        private Quest currentQuest;
 
-        public void JumpToQuest(QuestList questName, Quest currentQuest, int questIndex)
+        public void SetupAndStartQuesting(TaskOptionData StartingData)
+        {
+            data = StartingData;
+            currentQuest = quests.Where(quest => quest.Key == data.questName).Take(1).ElementAt(0).Value;
+            data = currentQuest.JumpToQuestIndex(data.questIndex);
+            StartQuestFlow();
+        }
+
+        public void StartQuestFlow()
         {
             while (!data.shouldEventStop)
             {
-                if (currentQuest == null || questName != currentQuest.questName)
+                if (data.questName != currentQuest.questName)
                 {
-                    Quest a = quests.Where(quest => quest.Key == questName).Take(1).ElementAt(0).Value;
-                    if (questIndex != -1)
+                    currentQuest = quests.Where(quest => quest.Key == data.questName).Take(1).ElementAt(0).Value;
+                    if (data.questIndex != -1)
                     {
-                        data = a.JumpToQuestIndex(questIndex);
+                        data = currentQuest.JumpToQuestIndex(data.questIndex);
                     }
                     else
                     {
-                        data = a.GoToNextTask();
+                        data = currentQuest.GoToNextTask();
                     }
                 }
                 else
@@ -36,9 +45,8 @@ namespace Projekt_AiSD
         }
 
         public void AddQuest(Quest quest)
-        {          
+        {
             quests.Add(quest.questName, quest);
         }
-
     }
 }

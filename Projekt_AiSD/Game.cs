@@ -119,8 +119,8 @@ namespace Projekt_AiSD
             newGame.AddQuest(death_object);
             newGame.AddQuest(oldSword_object);
 
-            newGame.JumpToQuest(MainQuest, null, 0);
-                
+            newGame.SetupAndStartQuesting(new TaskOptionData(MainQuest, 0));
+
         }
         private void Load() { WriteLine("load game in the future"); }
 

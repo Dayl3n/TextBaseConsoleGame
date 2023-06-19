@@ -50,9 +50,9 @@ namespace Projekt_AiSD
             Quest Wagoon = new Quest(QuestList.Wagoon, player);
             try
             {
-
+                string csvPlotPath = @"";
             }
-            catch (FileNotFoundException e)
+            catch (FileNotFoundException)
             {
                 Console.WriteLine("plik");
             }

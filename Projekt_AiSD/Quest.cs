@@ -34,8 +34,6 @@ namespace Projekt_AiSD
         {
             questIndex=index;
             chosenOption=taskList[questIndex].StartTask();
-            Console.WriteLine(taskList[questIndex].optionList.ElementAt(chosenOption).Value.questName);
-            Console.WriteLine(taskList[questIndex].optionList.ElementAt(chosenOption).Value.questIndex);
             return taskList[questIndex].optionList.ElementAt(chosenOption).Value;
         }
 
