@@ -42,6 +42,3 @@ namespace Projekt_AiSD
 
     }
 }
-
-/*          
-*/

@@ -9,7 +9,7 @@ namespace Projekt_AiSD
     internal class Weapon : Items
     {
         private int modifier = 0;
-        public Weapon(string art, string name, int rarity, int size, int value) : base(art, name, rarity, size, false)
+        public Weapon(string art, string name, itemRarity rarity, itemSize size, int value) : base(art, name, rarity, size, false)
         {
             modifier = value;
         }
@@ -21,7 +21,6 @@ namespace Projekt_AiSD
 
         public override void Equip(Player player)
         {
-            isequpid = !isequpid;
             player.AddAttackModifier(modifier);
         }
     }

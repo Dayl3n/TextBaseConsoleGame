@@ -7,62 +7,31 @@ using System.IO;
 
 namespace Projekt_AiSD
 {
-    internal class DataBaseReader
+    internal class DataBaseReader : Game
     {
         public List<Items> weaponList = new List<Items>();
-        public void itemsList()
+        public DataBaseReader()
+        {
+            itemsList();
+        }
+        private void itemsList()
         {
             try
             {
-                string itemsPath = "C:\\Users\\Kuba\\source\\repos\\Projekt_AiSD\\items.txt";
-                string fileContent = File.ReadAllText(itemsPath);
-                string[] lines = fileContent.Split(new string[] { "\\r\\n" }, StringSplitOptions.None);
-
-               
-
-                foreach (string line in lines)
+                string itemsPath = "C:\\Users\\Kuba\\source\\repos\\Projekt_AiSD\\weapons.csv";
+                using (StreamReader reader = new StreamReader(itemsPath))
                 {
-                    string[] data = line.Split(',');
-
-                    if (data.Length == 5)
+                    while (!reader.EndOfStream)
                     {
-                        try
-                        {
-                            string art = data[1];
-                            Console.WriteLine($"{art}");
-                            Console.ReadKey();
-                            string name = data[1];
-                            Console.WriteLine($"{name}");
-                            Console.ReadKey();
-                            int rarity = int.Parse(data[2]);
-                            int size = int.Parse(data[3]);
-                            int value = int.Parse(data[4]);
-
-                            Console.WriteLine($"{art}\n {name}\n{rarity}\n{size}\n{value}");
-                            Console.ReadKey();
-
-                            Weapon weapon = new Weapon(art, name, rarity, size, value);
-                            weaponList.Add(weapon);
-                        }
-                        catch (FormatException)
-                        {
-                            Console.WriteLine($"Nieprawidłowy format danych: {line}");
-                            Console.ReadKey();
-                        }
+                        string item = reader.ReadLine();
+                        string[] rowData = item.Split(';');
+                        string art = rowData[0].Replace(@"\r\n","\r\n");
+                        Weapon newWeapon = new Weapon(art, rowData[1], (itemRarity)Enum.Parse(typeof(itemRarity), rowData[2]), (itemSize)Enum.Parse(typeof(itemSize), rowData[3]), int.Parse(rowData[4]));
+                        weaponList.Add(newWeapon);
                     }
                 }
-
-                foreach (Weapon weapon in weaponList)
-                {
-                    Console.WriteLine($"Art: {weapon.art}");
-                    Console.WriteLine($"Name: {weapon.name}");
-                    Console.WriteLine($"Rarity: {weapon.itemRarity}");
-                    Console.ReadKey(true);
-                }
-
-
             }
-            catch (FileNotFoundException e)           
+            catch (FileNotFoundException)
             {
                 Console.WriteLine("plik");
             }
@@ -71,6 +40,28 @@ namespace Projekt_AiSD
                 Console.WriteLine(e.Message);
                 Console.ReadKey();
             }
+        }
+
+        private Event PlotReader()
+        {
+            Event newEvent = new Event();
+            Quest MainQuest = new Quest(QuestList.MainQuest, player);
+            Quest OldSword = new Quest(QuestList.OldSword, player);
+            Quest Wagoon = new Quest(QuestList.Wagoon, player);
+            try
+            {
+
+            }
+            catch (FileNotFoundException e)
+            {
+                Console.WriteLine("plik");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.ReadKey();
+            }
+            return newEvent;
         }
     }
 }

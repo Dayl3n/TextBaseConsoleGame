@@ -11,8 +11,9 @@ namespace Projekt_AiSD
     
     internal class Quest
     {
+
         public Player character;
-        private List<Task> taskList = new List<Task>();
+        private List<MyTask> taskList = new List<MyTask>();
         public int chosenOption;
         public QuestList questName;
         public int questIndex;
@@ -24,7 +25,7 @@ namespace Projekt_AiSD
         }
 
 
-        public void addTask(Task task)
+        public void addTask(MyTask task)
         {
             taskList.Add(task);
         }

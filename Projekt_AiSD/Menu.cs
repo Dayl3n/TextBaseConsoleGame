@@ -22,7 +22,7 @@ namespace Projekt_AiSD
             ForegroundColor = ConsoleColor.Red;
             if (choicesListQuest != null)
             {
-                WriteLine("\n" + prompt);
+                Game.centerText(prompt+"\n",prompt.Length);              
                 for (int i = 0; i < choicesListQuest.Count; i++)
                 {
 
@@ -36,7 +36,7 @@ namespace Projekt_AiSD
                         prefix = " ";
                         ForegroundColor = ConsoleColor.Red;
                     }
-                    WriteLine($"                            {prefix} {choicesListQuest.ElementAt(i).Key}");
+                    Game.centerText($"{prefix}{choicesListQuest.ElementAt(i).Key}",choicesListQuest.ElementAt(i).Key.Length);
 
                 }
                 ResetColor();

@@ -9,29 +9,38 @@ namespace Projekt_AiSD
     internal class Equipment
     {
         public List<Items> AllItems = new List<Items>();
-        public List<Items> equipedItems = new List<Items>();       
-        public List<Items> unequipedItems = new List<Items>();
+        public Weapon equipedWeapon = null;
+        public Armor equipedArmor = null;
         public int itemIndex;
 
 
         public void equipItem(Items item,Player player)
         {
-            unequipedItems.Remove(item);
-            equipedItems.Add(item);
+            if(item.GetType()==typeof(Weapon)) 
+            {
+                equipedWeapon = (Weapon)item;
+            }
+            if (item.GetType() == typeof(Armor))
+            {
+                equipedArmor = (Armor)item;
+            }
             item.Equip(player);
         }
 
         public void useItem(Items item)
         {
-            unequipedItems.Remove(item);
+            AllItems.Remove(item);
         }
 
         public void DisplayEquipmentMenu()
         {
-            foreach(var item in AllItems)
-            {
-                Console.Write(item.art);
-            }
+            EqMenu newmenu = new EqMenu(this);
+            int seletecedint = newmenu.ChangeOption();
+        }
+
+        public void AddItem(Items item)
+        {
+            AllItems.Add(item);
         }
     }
 }

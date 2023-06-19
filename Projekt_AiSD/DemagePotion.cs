@@ -8,21 +8,21 @@ namespace Projekt_AiSD
 {
     internal class DemagePotion : Potion
     {
-        public DemagePotion(string name, int rarity, int size) : base(name, rarity, size)
+        public DemagePotion(string name, itemRarity rarity, itemSize size) : base(name, rarity, size)
         {          
         }
         
         public int Dmg()
         {
-            if (itemRarity == "legendary")
+            if (rarity == itemRarity.legendary)
                 return 1000;
-            switch (itemSize)
+            switch (size)
             {
-                case "small":
+                case itemSize.small:
                     return 2;
-                case "medium":
+                case itemSize.medium:
                     return 5;
-                case "large":
+                case itemSize.large:
                     return 8;
                 default:
                     return 0;

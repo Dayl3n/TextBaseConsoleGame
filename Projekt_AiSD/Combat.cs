@@ -44,7 +44,6 @@ namespace Projekt_AiSD
                         break;
                 }
             }
-            Console.WriteLine("PRZECIWNIK POKONANY");
         }
         private void Attack()
         {

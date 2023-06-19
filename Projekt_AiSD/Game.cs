@@ -10,8 +10,8 @@ namespace Projekt_AiSD
 {
     internal class Game
     {
+        
         private bool gameStatus = false;
-        private DataBaseReader reader = new DataBaseReader();
         public static Player player;
         private Dragon enemy = new Dragon("             __.-/|\r\n             \\`o_O'\r\n              =( )=  +-----+\r\n                U|   | BEN |" +
             "\r\n      /\\  /\\   / |   +-----+\r\n     ) /^\\) ^\\/ _)\\     |\r\n     )   /^\\/   _) \\    |\r\n     )   _ /  / _)  \\___|_\r\n /\\  )/\\/ || " +
@@ -72,39 +72,43 @@ namespace Projekt_AiSD
             string mainQuest_0_text = "Long long time ago there was a shitty looking dude that wanted to fuck your mum, what u do?";
             Dictionary<string, TaskOptionData> options_mainQuest_0 = new Dictionary<string, TaskOptionData>()
             {
-                {"bitten shit out of him",new TaskOptionData(MainQuest, 0)},
+                {"bitten shit out of him",new TaskOptionData(MainQuest, -1)},
                 {"helping him", new TaskOptionData(OldSword, 0)},
-                {"crying",new TaskOptionData(DeathInShadows, 0) }
+                {"crying",new TaskOptionData(Wagoon, 0) }
             };
-            Task mainQuest_0 = new Task(mainQuest_0_text, options_mainQuest_0);
+            MyTask mainQuest_0 = new MyTask(mainQuest_0_text, options_mainQuest_0);
+
+
 
             string mainQuest_1_text = "Well, u lost";
             Dictionary<string, TaskOptionData> options_mainQuest_1 = new Dictionary<string, TaskOptionData>()
             {
                 {"Try again", new TaskOptionData(MainQuest, -1)},
-                {"No U",new TaskOptionData(DeathInShadows, 0)},
+                {"No U",new TaskOptionData(Wagoon, 0)},
                 {"I admit my lose, now I'm helping him",new TaskOptionData(OldSword, 0)}
             };
-            Task mainQuest_1 = new Task(mainQuest_1_text, options_mainQuest_1);
+            MyTask mainQuest_1 = new MyTask(mainQuest_1_text, options_mainQuest_1);
+
+            
 
             string oldSword_0_text = "Bro, what is wrong with you?";
             Dictionary<string, TaskOptionData> options_oldSword_0 = new Dictionary<string, TaskOptionData>()
             {
                 {"Enjoy yourself", new TaskOptionData(OldSword, -1)},
-                {"Killing yourself", new TaskOptionData(DeathInShadows, 0)}
+                {"Killing yourself", new TaskOptionData(Wagoon, 0)}
             };
-            Task oldSword_0 = new Task(oldSword_0_text, options_oldSword_0);
+            MyTask oldSword_0 = new MyTask(oldSword_0_text, options_oldSword_0);
 
             string deathInShadows_0_text = "C'mon little crybaby do something";
             Dictionary<string, TaskOptionData> options_deathInShadows_0 = new Dictionary<string, TaskOptionData>()
             {
-                {"SHUT UP", new TaskOptionData(DeathInShadows, -1)}
+                {"SHUT UP", new TaskOptionData(Wagoon, -1)}
             };
-            Task deathInShadows_0 = new Task(deathInShadows_0_text, options_deathInShadows_0);
+            MyTask deathInShadows_0 = new MyTask(deathInShadows_0_text, options_deathInShadows_0);
 
             Quest mainQuest_object = new Quest(MainQuest, player);
             Quest oldSword_object = new Quest(OldSword, player);
-            Quest death_object = new Quest(DeathInShadows, player);
+            Quest death_object = new Quest(Wagoon, player);
 
             mainQuest_object.addTask(mainQuest_0);
             mainQuest_object.addTask(mainQuest_1);
@@ -117,12 +121,6 @@ namespace Projekt_AiSD
 
             newGame.JumpToQuest(MainQuest, null, 0);
                 
-            Equipment equipment = new Equipment();
-            equipment.AllItems = reader.weaponList;
-            equipment.DisplayEquipmentMenu();
-            ReadKey(true);
-            Combat newCombar = new Combat(player, enemy);
-            newCombar.RunCombat();
         }
         private void Load() { WriteLine("load game in the future"); }
 
@@ -153,6 +151,10 @@ namespace Projekt_AiSD
                      ██████      ██████  ██ ███████ ██████ ");
             ReadKey(true);
             Environment.Exit(0);
+        }
+        public static void centerText(string text, int length)
+        {
+            Console.WriteLine("\n"+String.Format("{0," + ((Console.WindowWidth / 2) + (length / 2)) + "}", text));
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Projekt_AiSD
             this.questIndex = questIndex;
         }
     }
-    internal class Task
+    internal class MyTask
     {
         public string text { get; private set; }
         public string[] options { get; private set; }
@@ -27,18 +27,38 @@ namespace Projekt_AiSD
 
         public Dictionary<string, TaskOptionData> optionList;
 
+        private bool isReward=false;
+       
+        private Player player;
+        private Enemy enemy;
+        private Items reward;
 
 
-        public Task(string text, Dictionary<string, TaskOptionData> choices)
+
+        public MyTask(string text, Dictionary<string, TaskOptionData> choices)
         {
             this.text = text;
             optionList = choices;
             this.previousQuest = previousQuest;
         }
 
+        public MyTask(Player player, Enemy enemy, Items reward)
+        {
+            this.player = player;
+            this.enemy = enemy;
+            this.reward = reward;
+            isReward = true;
+        }
+
         public int StartTask()
-        {      
-            chosenOption = Conversation();        
+        {
+            if (enemy != null)
+            {
+                combat();
+                return -1;
+            }
+            else
+                chosenOption = Conversation();        
             return chosenOption;
         }
 
@@ -51,8 +71,11 @@ namespace Projekt_AiSD
 
         private bool combat()
         {
-            //TODO
-            return false;
+            Combat newCombat = new Combat(player,enemy);
+            newCombat.RunCombat();
+            player.GetExp(enemy.exp);
+            player.GetItem(reward);
+            return true;
         }
         private int Conversation()
         {
