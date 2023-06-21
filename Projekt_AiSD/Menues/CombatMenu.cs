@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Projekt_AiSD.Enemies;
+using Projekt_AiSD.Player_Staff;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -7,14 +9,14 @@ using System.Threading.Tasks;
 using static System.Console;
 
 
-namespace Projekt_AiSD
+namespace Projekt_AiSD.Menues
 {
     internal class CombatMenu : Menu
     {
         private string[] options = { "Attack", "Items", "Run" };
         private Enemy enemy;
         private Player player;
-        public CombatMenu(Player player, Enemy enemy) 
+        public CombatMenu(Player player, Enemy enemy)
         {
             this.enemy = enemy;
             this.player = player;
@@ -30,7 +32,7 @@ namespace Projekt_AiSD
         {
             WriteLine(enemy.art);
             string prefix = "";
-            WriteLine(new String('-', 70));
+            WriteLine(new string('-', 70));
             for (int i = 0; i < options.Length; i++)
             {
                 if (i == selectedIndex)
@@ -41,11 +43,11 @@ namespace Projekt_AiSD
                 {
                     prefix = " ";
                 }
-                WriteLine($"|{new String(' ', 65 - options[i].Length)}{prefix}{options[i]}{new String(' ', 3)}|");
+                WriteLine($"|{new string(' ', 65 - options[i].Length)}{prefix}{options[i]}{new string(' ', 3)}|");
 
             }
-            WriteLine(new String('-', 70));
-            WriteLine($"player hp: {player.hp}      enemy hp:{enemy.hp}");
+            WriteLine(new string('-', 70));
+            WriteLine($"player hp: {player.hp.value}      enemy hp:{enemy.hp}");
         }
 
         public override int ChangeOption()

@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Projekt_AiSD
+namespace Projekt_AiSD.Item
 {
-    internal class DemagePotion : Potion
+    internal class DamagePotion : Potion
     {
-        public DemagePotion(string name, itemRarity rarity, itemSize size) : base(name, rarity, size)
-        {          
+        public DamagePotion(string name) : base(name)
+        {
         }
-        
+
         public int Dmg()
         {
             if (rarity == itemRarity.legendary)

@@ -5,30 +5,32 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Projekt_AiSD.Enemies;
+using Projekt_AiSD.Menues;
+using Projekt_AiSD.Player_Staff;
 
-namespace Projekt_AiSD
+namespace Projekt_AiSD.Plot
 {
     internal class Combat
     {
         private Enemy enemy;
         private Player player;
         private string[] playerOptions = { "Attack", "Items", "Run" };
-        //private string[] playerAttack;
         private int selectedOption;
         private Menu combatMenu;
         private Menu attackMenu;
-        
 
-        public Combat(Player player, Enemy enemy) 
+
+        public Combat(Player player, Enemy enemy)
         {
             this.player = player;
             this.enemy = enemy;
             combatMenu = new CombatMenu(this.player, this.enemy);
         }
 
-        public void RunCombat()
+        public int RunCombat()
         {
-            while (enemy.hp != 0)
+            while (enemy.hp > 0)
             {
                 selectedOption = combatMenu.ChangeOption();
                 switch (selectedOption)
@@ -41,9 +43,10 @@ namespace Projekt_AiSD
                         break;
                     case 2:
                         Run();
-                        break;
-                }
+                        return 1;
+                }               
             }
+            return 0;
         }
         private void Attack()
         {
@@ -74,27 +77,27 @@ namespace Projekt_AiSD
         }
         private void Run()
         {
-            Event test = new Event();    
+            Event test = new Event();
         }
 
 
         private void Swing()
         {
-            int dmg = RandomNumberGenerator.GetInt32(player.attack / 2, player.attack);            
-            enemy.changeHp(-1*dmg);
-            player.changeHp(-enemy.Attack());
+            int dmg = RandomNumberGenerator.GetInt32(player.attack.value / 2, player.attack.value);
+            enemy.changeHp((-1 * dmg)+(int)Math.Floor(enemy.armor*0.2));
+            player.changeHp((-enemy.Attack())+(int)Math.Ceiling(player.armor.value*0.2));
         }
         private void ThrowStone()
         {
-            int dmg = RandomNumberGenerator.GetInt32(player.attack / 4, player.attack / 2);
+            int dmg = RandomNumberGenerator.GetInt32(player.attack.value / 4, player.attack.value / 2);
             enemy.changeHp(-1 * dmg);
             player.changeHp(-enemy.Attack());
         }
 
         private void Block()
         {
-            int tempEnemyAttack = enemy.Attack()-player.armor/5;
-            player.changeHp(-1*tempEnemyAttack);
+            int tempEnemyAttack = enemy.Attack() - player.armor.value / 5;
+            player.changeHp(-1 * tempEnemyAttack);
         }
         private void Shout()
         {

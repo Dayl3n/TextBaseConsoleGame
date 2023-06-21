@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Console;
 using static Projekt_AiSD.QuestList;
+using Projekt_AiSD.Plot;
+using Projekt_AiSD.Player_Staff;
 
-
-namespace Projekt_AiSD
+namespace Projekt_AiSD.Menues
 {
     internal class Menu
     {
@@ -40,6 +41,13 @@ namespace Projekt_AiSD
 
                 }
                 ResetColor();
+
+               
+                WriteLine("\n\n\n\n\n" + new String('_',WindowWidth)+"\n\n");
+                string instructions1 = "arrow up and down - selecet your option       press [enter] - confirm your choice";
+                string instructions2 = "press[i] - open character view      press [esc] - pause game";               
+                Game.centerText(instructions1, instructions2.Length);
+                Game.centerText(instructions2, instructions1.Length);
             }
         }
         virtual public int ChangeOption()
@@ -67,6 +75,11 @@ namespace Projekt_AiSD
                 }
                 else if (keyPressed == ConsoleKey.Escape)
                     Game.RunMainMenu();
+                else if (keyPressed == ConsoleKey.I)
+                {
+                    Equipment.DisplayEquipmentMenu();
+                    Game.RunMainMenu();
+                }
 
             } while (keyPressed != ConsoleKey.Enter);
             return selectedIndex;

@@ -5,35 +5,36 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Transactions;
+using Projekt_AiSD.Player_Staff;
 
-namespace Projekt_AiSD
+namespace Projekt_AiSD.Plot
 {
-    
+
     internal class Quest
     {
 
         public Player character;
-        private List<MyTask> taskList = new List<MyTask>();
+        private Dictionary<int,MyTask> taskList = new Dictionary<int, MyTask>();
         public int chosenOption;
         public QuestList questName;
         public int questIndex;
 
-        public Quest(QuestList name,Player player)
+        public Quest(QuestList name, Player player)
         {
-            this.questName = name;
+            questName = name;
             character = player;
         }
 
 
-        public void addTask(MyTask task)
+        public void addTask(int taskIndex,MyTask task)
         {
-            taskList.Add(task);
+            taskList.Add(taskIndex,task);
         }
 
         public TaskOptionData JumpToQuestIndex(int index)
         {
-            questIndex=index;
-            chosenOption=taskList[questIndex].StartTask();
+            questIndex = index;
+            chosenOption = taskList[questIndex].StartTask();
             return taskList[questIndex].optionList.ElementAt(chosenOption).Value;
         }
 
@@ -49,9 +50,14 @@ namespace Projekt_AiSD
             else
             {
                 questIndex++;
-                chosenOption=taskList[questIndex].StartTask();
+                chosenOption = taskList[questIndex].StartTask();
                 return taskList[questIndex].optionList.ElementAt(chosenOption).Value;
             }
+        }
+
+        public void SortTaskList()
+        {
+            taskList = taskList.OrderBy(obj => obj.Key).ToDictionary(obj => obj.Key, obj => obj.Value);
         }
     }
 }

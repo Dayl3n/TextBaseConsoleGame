@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Projekt_AiSD.Player_Staff;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 using static System.Console;
 
 
-namespace Projekt_AiSD
+namespace Projekt_AiSD.Item
 {
 
     internal class Items
@@ -17,15 +18,16 @@ namespace Projekt_AiSD
         public string name { get; protected set; }
         public string art { get; protected set; }
         private bool isequpid;
+        public int modifier;
 
 
 
-        public Items(string art, string name, itemRarity rarity, itemSize size, bool isequpable)
+        public Items(string art, string name, itemRarity rarity, bool isequpable)
         {
             this.art = art;
             this.name = name;
             this.rarity = rarity;
-            this.isequpid = isequpable;
+            isequpid = isequpable;
             this.size = size;
         }
 
@@ -39,42 +41,42 @@ namespace Projekt_AiSD
         }
         public void getItemName()
         {
-            switch(rarity)
+            switch (rarity)
             {
                 case itemRarity.common:
-                {
-                    ForegroundColor = ConsoleColor.White;
-                    Write(name);
-                    break;
-                }
+                    {
+                        ForegroundColor = ConsoleColor.White;
+                        Write(name);
+                        break;
+                    }
                 case itemRarity.uncommon:
-                {
-                    ForegroundColor = ConsoleColor.Green;
-                    Write(name);
-                    break;
-                }
+                    {
+                        ForegroundColor = ConsoleColor.Green;
+                        Write(name);
+                        break;
+                    }
                 case itemRarity.rare:
-                {
-                    ForegroundColor = ConsoleColor.Blue;
-                    Write(name);
-                    break;
-                }
+                    {
+                        ForegroundColor = ConsoleColor.Blue;
+                        Write(name);
+                        break;
+                    }
                 case itemRarity.epic:
-                {
-                    ForegroundColor = ConsoleColor.Magenta;
-                    Write(name);
-                    break;
-                }
+                    {
+                        ForegroundColor = ConsoleColor.Magenta;
+                        Write(name);
+                        break;
+                    }
                 case itemRarity.legendary:
-                {
-                    ForegroundColor = ConsoleColor.DarkYellow;
-                    Write(name);
-                    break;
-                }
+                    {
+                        ForegroundColor = ConsoleColor.DarkYellow;
+                        Write(name);
+                        break;
+                    }
             }
         }
 
- 
+
 
         virtual public void Equip(Player player)
         {

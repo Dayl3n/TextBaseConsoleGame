@@ -5,20 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Console;
 
-namespace Projekt_AiSD
+namespace Projekt_AiSD.Menues
 {
     internal class MainMenu : Menu
     {
         private string[] choicesListMenu = { "New Game", "Save game", "Load game", "Credits", "Exit" };
         private bool isRunning;
-        public bool _isRunning { 
-            get { return isRunning; } 
-            set 
+        public bool _isRunning
+        {
+            get { return isRunning; }
+            set
             {
-                if(value)
+                if (value)
                     choicesListMenu[0] = "Continue";
-                isRunning = value; 
-            } 
+                isRunning = value;
+            }
         }
         public MainMenu()
         {
@@ -34,14 +35,14 @@ namespace Projekt_AiSD
            ▄████▀      ████████▀   ▄████████▀     ▄████▀     ███   ▀█▀  ▀██████▀   ▀███▀███▀  █▀    ███    █▀  
             ▀                        ▀                        ▀                                      ▀                                                                                                   
             ";
-            isRunning= false;
+            isRunning = false;
         }
 
         protected override void DisplayOptions()
         {
             string prefix = " ";
             ForegroundColor = ConsoleColor.Red;
-            Game.centerText(prompt,103);
+            Game.centerText(prompt, 103);
             for (int i = 0; i < choicesListMenu.Length; i++)
             {
 
@@ -65,7 +66,7 @@ namespace Projekt_AiSD
             }
             ResetColor();
         }
-        
+
         public override int ChangeOption()
         {
             ConsoleKey keyPressed;

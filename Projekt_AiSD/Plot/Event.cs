@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static Projekt_AiSD.QuestList;
 
-namespace Projekt_AiSD
+namespace Projekt_AiSD.Plot
 {
     internal class Event
     {
@@ -48,5 +48,7 @@ namespace Projekt_AiSD
         {
             quests.Add(quest.questName, quest);
         }
+
+
     }
 }

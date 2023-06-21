@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 namespace Projekt_AiSD
 {
     public enum itemRarity {common, uncommon, rare, epic, legendary}
-    public enum QuestList {MainMenu, MainQuest, OldSword, Wagoon };
+    public enum QuestList {MainMenu, MainQuest, OldSword, Wagoon,Death, WrongWay };
     public enum itemSize { small, medium , large }
 }

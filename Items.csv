@@ -1,0 +1,10 @@
+﻿0;Potion;HealingPotion;;;
+1;Potion;DamagePotion;;;
+2;Weapon;  __\r\n  || \r\n _||_ \r\n( || ) \r\n  || \r\n  || \r\n  || \r\n  || \r\n  || \r\n  || \r\n  || \r\n  \/;Sword;common;3
+3;Weapon; ()\r\n  )(\r\no====o\r\n  ||\r\n  ||\r\n  ||\r\n  ||\r\n  ||\r\n  ||\r\n  ||\r\n  ||\r\n  \/;Longsword;uncommon;5
+4;Weapon;  /\\r\n  ||\r\n  ||\r\n  ||\r\n  ||\r\n  ||\r\n  ||\r\n__||__\r\n`----.`\r\n  ||  )\r\n  ||  )\r\n   '-';Sabre;rare;7
+5;Weapon;                 /\)\r\n                /\/\r\n               /\/\r\n             _/\/\r\n            (/\_)\r\n            /%/  \r\n           /%/  \r\n          /%/\r\n         /%/\r\n        /%/\r\n       /%/\r\n      /%/\r\n     /%/\r\n    /%/\r\n   /%/\r\n  /%/ \r\n  \/;Tsurugi;legendary;12
+6;Armor;"    _..._\r\n.-'_.---._'-.\r\n||####|(__)||\r\n((####|(**)))\r\n '\\###|_''/'\r\n  \\\\()|##//\r\n   \\\\ |#//\r\n    .\\_/.\r\n     L.J\r\n      \""";shield;common;3
+7;Armor ;  |`-._/\\_.-`|\r\n  |    ||    |\r\n  |___o()o___|\r\n  |__((<>))__|\r\n  \\   o\\/o   /\r\n   \\   ||   /\r\n    \\  ||  /\r\n     '.||.'\r\n       ``;Guard's shield;uncommon;5
+8;Armor;\\_              _/\r\n] --__________-- [\r\n|       ||       |\r\n\\       ||       /\r\n [      ||      ]\r\n |______||______|\r\n |------..------|\r\n ]      ||      [\r\n  \\     ||     /\r\n   [    ||    ]\r\n   \\    ||    /\r\n    [   ||   ]\r\n     \\__||__/\r\n        --;Templar shield;epic;9
+9;Armor;\\_              _/\r\n] --__________-- [\r\n|       ||       |\r\n\\       ||       /\r\n [      ||      ]\r\n |______||______|\r\n |------..------|\r\n ]      ||      [\r\n  \\     ||     /\r\n   [    ||    ]\r\n   \\    ||    /\r\n    [   ||   ]\r\n     \\__||__/\r\n        --;The Aegis of Demons;legendary;12

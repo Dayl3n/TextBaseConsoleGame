@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Projekt_AiSD.Enemies;
+using Projekt_AiSD.Item;
+using Projekt_AiSD.Menues;
+using Projekt_AiSD.Player_Staff;
 
-namespace Projekt_AiSD
+namespace Projekt_AiSD.Plot
 {
     public struct TaskOptionData
     {
         public QuestList questName;
         public int questIndex;
-        public bool shouldEventStop=false;
+        public bool shouldEventStop = false;
 
         public TaskOptionData(QuestList name, int questIndex)
         {
-            this.questName = name;
+            questName = name;
             this.questIndex = questIndex;
         }
     }
@@ -23,12 +27,9 @@ namespace Projekt_AiSD
         public string text { get; private set; }
         public string[] options { get; private set; }
         public int chosenOption { get; private set; }
-        public QuestList previousQuest{ get;  set; }
-
         public Dictionary<string, TaskOptionData> optionList;
+        private bool isReward = false;
 
-        private bool isReward=false;
-       
         private Player player;
         private Enemy enemy;
         private Items reward;
@@ -39,26 +40,26 @@ namespace Projekt_AiSD
         {
             this.text = text;
             optionList = choices;
-            this.previousQuest = previousQuest;
         }
 
-        public MyTask(Player player, Enemy enemy, Items reward)
+        public MyTask(Player player, Enemy enemy, Dictionary<string, TaskOptionData> choices, Items reward = null)
         {
             this.player = player;
             this.enemy = enemy;
             this.reward = reward;
             isReward = true;
+            optionList = choices;
         }
 
         public int StartTask()
         {
             if (enemy != null)
             {
-                combat();
-                return -1;
+                chosenOption = combat();
+                return chosenOption;
             }
             else
-                chosenOption = Conversation();        
+                chosenOption = Conversation();
             return chosenOption;
         }
 
@@ -69,13 +70,13 @@ namespace Projekt_AiSD
             this.options = options;
         }
 
-        private bool combat()
+        private int combat()
         {
-            Combat newCombat = new Combat(player,enemy);
-            newCombat.RunCombat();
+            Combat newCombat = new Combat(player, enemy);
+            int chosenOptionCombat=newCombat.RunCombat();
             player.GetExp(enemy.exp);
-            player.GetItem(reward);
-            return true;
+            //player.GetItem(reward);
+            return chosenOption;
         }
         private int Conversation()
         {

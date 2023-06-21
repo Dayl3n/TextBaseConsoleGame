@@ -6,18 +6,17 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Projekt_AiSD
+namespace Projekt_AiSD.Enemies
 {
     internal class Dragon : Enemy
     {
         public Dragon(string art, int hp, int givenExp, int AttackValue, int armorValue) : base(art, hp, givenExp, AttackValue, armorValue)
         {
+            setAttacks();
         }
 
-        public new int Attack()
-        {
-            attackList.Clear();
-            setAttacks();
+        public override int Attack()
+        {           
             int chosenAttack = RandomNumberGenerator.GetInt32(3);
             return attackList[chosenAttack]();
         }
@@ -30,7 +29,7 @@ namespace Projekt_AiSD
         }
         private int DragonBreath()
         {
-            int dmg = RandomNumberGenerator.GetInt32(attack, (int)(attack*1.5));
+            int dmg = RandomNumberGenerator.GetInt32(attack, (int)(attack * 1.5));
             return dmg;
         }
         private int TailSwing()
